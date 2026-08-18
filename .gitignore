@@ -1,0 +1,35 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter / IPython Checkpoints
+.ipynb_checkpoints/
+
+# Virtual Environments
+env/
+venv/
+.venv/
+
+# IDE / OS specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Course source lab files (Not part of student project repository)
+Lab1_*.ipynb
+Lab2_*.ipynb
+Lab3_*.ipynb
+Lab4_*.ipynb
+CSE440_Lab_Project_*.md
+experiments/
+
+# Temporary / Local notebooks (Master notebook will be added when ready)
+*.ipynb
+
+# Model checkpoints & large binary assets exceeding GitHub limits (398MB)
+results/ensemble_model.pkl
+*.zip
+*.tar.gz
+.tools/

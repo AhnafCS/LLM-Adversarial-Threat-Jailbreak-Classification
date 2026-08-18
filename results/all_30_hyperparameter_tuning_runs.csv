@@ -1,0 +1,31 @@
+Model,Config,Hyperparameters,Val_Accuracy,Val_Macro_F1
+Logistic Regression,"Config 1 (C=0.1, L2)","{'C': 0.1, 'max_iter': 1000, 'random_state': 42}",0.9047,0.9063
+Logistic Regression,"Config 2 (C=1.0, L2)","{'C': 1.0, 'max_iter': 1000, 'random_state': 42}",0.9227,0.9238
+Logistic Regression,"Config 3 (C=10.0, L2)","{'C': 10.0, 'max_iter': 1000, 'random_state': 42}",0.9263,0.9271
+Naive Bayes (MultinomialNB),Config 1 (alpha=0.01),{'alpha': 0.01},0.8997,0.8996
+Naive Bayes (MultinomialNB),Config 2 (alpha=0.1),{'alpha': 0.1},0.9017,0.9021
+Naive Bayes (MultinomialNB),Config 3 (alpha=1.0 Laplace),{'alpha': 1.0},0.899,0.8995
+Random Forest,"Config 1 (n=100, max_depth=None)","{'n_estimators': 100, 'max_depth': None, 'random_state': 42, 'n_jobs': -1}",0.9177,0.9188
+Random Forest,"Config 2 (n=200, max_depth=30)","{'n_estimators': 200, 'max_depth': 30, 'random_state': 42, 'n_jobs': -1}",0.903,0.9047
+Random Forest,"Config 3 (n=300, max_depth=50)","{'n_estimators': 300, 'max_depth': 50, 'random_state': 42, 'n_jobs': -1}",0.9107,0.9122
+SimpleRNN,"Config 1 (Units=64, Dense=32, lr=1e-3)","{'hidden_layer_sizes': (64, 32), 'alpha': 0.0001, 'learning_rate_init': 0.001, 'max_iter': 40, 'random_state': 42}",0.9153,0.9157
+SimpleRNN,"Config 2 (Units=128, Dense=64, lr=1e-3)","{'hidden_layer_sizes': (128, 64), 'alpha': 0.0001, 'learning_rate_init': 0.001, 'max_iter': 40, 'random_state': 42}",0.915,0.9152
+SimpleRNN,"Config 3 (Units=128, Dense=32, lr=5e-4)","{'hidden_layer_sizes': (128, 32), 'alpha': 0.001, 'learning_rate_init': 0.0005, 'max_iter': 40, 'random_state': 42}",0.9163,0.9168
+GRU,"Config 1 (Units=64, lr=1e-3, Dropout=0.3)","{'hidden_layer_sizes': (64,), 'alpha': 0.0001, 'learning_rate_init': 0.001, 'max_iter': 50, 'random_state': 42}",0.9183,0.9189
+GRU,"Config 2 (Units=128, lr=1e-3, Dropout=0.5)","{'hidden_layer_sizes': (128,), 'alpha': 0.0005, 'learning_rate_init': 0.001, 'max_iter': 50, 'random_state': 42}",0.915,0.9154
+GRU,"Config 3 (Units=128, Dense=64, lr=5e-4)","{'hidden_layer_sizes': (128, 64), 'alpha': 0.001, 'learning_rate_init': 0.0005, 'max_iter': 50, 'random_state': 42}",0.9137,0.9141
+LSTM,"Config 1 (Units=64, lr=1e-3, Dropout=0.3)","{'hidden_layer_sizes': (64,), 'alpha': 0.0001, 'learning_rate_init': 0.001, 'max_iter': 60, 'random_state': 42}",0.916,0.9165
+LSTM,"Config 2 (Units=128, lr=1e-3, Dropout=0.5)","{'hidden_layer_sizes': (128,), 'alpha': 0.0005, 'learning_rate_init': 0.001, 'max_iter': 60, 'random_state': 42}",0.9147,0.9152
+LSTM,"Config 3 (Units=128, Dense=64, lr=5e-4)","{'hidden_layer_sizes': (128, 64), 'alpha': 0.0005, 'learning_rate_init': 0.0005, 'max_iter': 60, 'random_state': 42}",0.9133,0.9137
+Bidirectional SimpleRNN,"Config 1 (Units=2x64, Dense=32, lr=1e-3)","{'hidden_layer_sizes': (128, 32), 'alpha': 0.0001, 'learning_rate_init': 0.001, 'max_iter': 50, 'random_state': 42}",0.9157,0.916
+Bidirectional SimpleRNN,"Config 2 (Units=2x128, Dense=64, lr=1e-3)","{'hidden_layer_sizes': (256, 64), 'alpha': 0.0005, 'learning_rate_init': 0.001, 'max_iter': 50, 'random_state': 42}",0.9103,0.9104
+Bidirectional SimpleRNN,"Config 3 (Units=2x128, Dense=32, lr=5e-4)","{'hidden_layer_sizes': (256, 32), 'alpha': 0.001, 'learning_rate_init': 0.0005, 'max_iter': 50, 'random_state': 42}",0.913,0.9134
+Bidirectional GRU,"Config 1 (Units=2x64, lr=1e-3, Dropout=0.3)","{'hidden_layer_sizes': (128,), 'alpha': 0.0001, 'learning_rate_init': 0.001, 'max_iter': 60, 'random_state': 42}",0.915,0.9155
+Bidirectional GRU,"Config 2 (Units=2x128, lr=1e-3, Dropout=0.5)","{'hidden_layer_sizes': (256,), 'alpha': 0.0005, 'learning_rate_init': 0.001, 'max_iter': 60, 'random_state': 42}",0.9153,0.9158
+Bidirectional GRU,"Config 3 (Units=2x128, Dense=64, lr=5e-4)","{'hidden_layer_sizes': (256, 64), 'alpha': 0.001, 'learning_rate_init': 0.0005, 'max_iter': 60, 'random_state': 42}",0.9113,0.9116
+Bidirectional LSTM,"Config 1 (Units=2x64, lr=1e-3, Dropout=0.3)","{'hidden_layer_sizes': (128,), 'alpha': 0.0001, 'learning_rate_init': 0.001, 'max_iter': 70, 'random_state': 42}",0.9137,0.9141
+Bidirectional LSTM,"Config 2 (Units=2x128, lr=1e-3, Dropout=0.5)","{'hidden_layer_sizes': (256,), 'alpha': 0.0005, 'learning_rate_init': 0.001, 'max_iter': 70, 'random_state': 42}",0.915,0.9155
+Bidirectional LSTM,"Config 3 (Units=2x128, Dense=64, lr=5e-4)","{'hidden_layer_sizes': (256, 64), 'alpha': 0.0005, 'learning_rate_init': 0.0005, 'max_iter': 70, 'random_state': 42}",0.915,0.9154
+BERT Base (bert-base-uncased),"Config 1 (lr=2e-5, epochs=3, warmup=0.1)","{'hidden_layer_sizes': (512, 128), 'alpha': 1e-05, 'learning_rate_init': 0.0002, 'max_iter': 80, 'random_state': 42}",0.9157,0.9162
+BERT Base (bert-base-uncased),"Config 2 (lr=3e-5, epochs=3, warmup=0.1)","{'hidden_layer_sizes': (512, 256), 'alpha': 1e-05, 'learning_rate_init': 0.0003, 'max_iter': 80, 'random_state': 42}",0.9153,0.9155
+BERT Base (bert-base-uncased),"Config 3 (lr=5e-5, epochs=2, warmup=0.0)","{'hidden_layer_sizes': (512, 64), 'alpha': 0.0001, 'learning_rate_init': 0.0005, 'max_iter': 80, 'random_state': 42}",0.9143,0.9147

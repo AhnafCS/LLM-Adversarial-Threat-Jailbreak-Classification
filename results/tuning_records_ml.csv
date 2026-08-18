@@ -1,0 +1,10 @@
+Model,Config,Hyperparameters,Val_Accuracy,Val_Macro_F1,Val_Weighted_F1
+Logistic Regression,"Config 1 (C=0.1, L2)","{'C': 0.1, 'max_iter': 1000, 'random_state': 42}",0.894,0.8962,0.8962
+Logistic Regression,"Config 2 (C=1.0, L2)","{'C': 1.0, 'max_iter': 1000, 'random_state': 42}",0.9083,0.9097,0.9097
+Logistic Regression,"Config 3 (C=10.0, L2)","{'C': 10.0, 'max_iter': 1000, 'random_state': 42}",0.9073,0.9084,0.9084
+Naive Bayes (MultinomialNB),Config 1 (alpha=0.01),{'alpha': 0.01},0.8733,0.8721,0.8721
+Naive Bayes (MultinomialNB),Config 2 (alpha=0.1),{'alpha': 0.1},0.879,0.8783,0.8783
+Naive Bayes (MultinomialNB),Config 3 (alpha=1.0 Laplace),{'alpha': 1.0},0.874,0.8732,0.8732
+Random Forest,"Config 1 (n=100, max_depth=None)","{'n_estimators': 100, 'max_depth': None, 'random_state': 42, 'n_jobs': -1}",0.9017,0.903,0.903
+Random Forest,"Config 2 (n=200, max_depth=30)","{'n_estimators': 200, 'max_depth': 30, 'random_state': 42, 'n_jobs': -1}",0.8773,0.8798,0.8798
+Random Forest,"Config 3 (n=300, max_depth=50)","{'n_estimators': 300, 'max_depth': 50, 'random_state': 42, 'n_jobs': -1}",0.8883,0.8906,0.8906

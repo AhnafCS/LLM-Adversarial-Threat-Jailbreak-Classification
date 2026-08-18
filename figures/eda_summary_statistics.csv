@@ -1,0 +1,6 @@
+label,Sample_Count,Avg_Char_Length,Median_Char_Length,Avg_Word_Count,Median_Word_Count,Max_Word_Count,Min_Word_Count
+harmful_behavior,4000,74.24975,69.0,12.639,12.0,40,2
+jailbreak,4000,703.137,89.0,112.2755,13.0,8445,2
+linguistic,4000,117.602,105.0,21.10225,19.0,159,3
+prompt_injection,4000,1802.69125,1581.0,266.67075,236.0,613,101
+toxicity,4000,186.55825,185.0,34.4305,34.0,131,4

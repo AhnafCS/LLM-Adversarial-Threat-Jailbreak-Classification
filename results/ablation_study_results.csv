@@ -1,0 +1,7 @@
+Configuration,Val_Accuracy,Val_Macro_F1
+Baseline (Standard TF-IDF + Stopwords Filter),0.9083,0.9097
+Ablation: Retain Stopwords (No Stopword Removal),0.9167,0.9179
+"Ablation: Unigrams Only (ngram_range=(1,1))",0.908,0.9095
+Ablation: With Porter Stemming,0.9033,0.9051
+Ablation: With WordNet Lemmatization,0.9053,0.9069
+Representation: CountVectorizer (BoW),0.9083,0.9094

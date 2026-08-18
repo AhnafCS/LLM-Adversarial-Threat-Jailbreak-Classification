@@ -1,0 +1,12 @@
+Model,Test_Accuracy,Test_Macro_F1,Test_Weighted_F1
+Random Forest,0.9143,0.9158,0.9158
+Logistic Regression,0.921,0.9218,0.9218
+Naive Bayes (MultinomialNB),0.9003,0.9012,0.9012
+SimpleRNN,0.9123,0.9127,0.9127
+GRU,0.9163,0.9169,0.9169
+LSTM,0.914,0.9145,0.9145
+Bidirectional SimpleRNN,0.911,0.9113,0.9113
+Bidirectional GRU,0.9107,0.911,0.911
+Bidirectional LSTM,0.912,0.9123,0.9123
+BERT Base,0.9137,0.9142,0.9142
+Soft-Voting Ensemble (BERT+BiLSTM+LogReg),0.9173,0.9179,0.9179

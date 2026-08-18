@@ -1,0 +1,16 @@
+{
+  "id_to_label": {
+    "0": "harmful_behavior",
+    "1": "jailbreak",
+    "2": "linguistic",
+    "3": "prompt_injection",
+    "4": "toxicity"
+  },
+  "label_to_id": {
+    "harmful_behavior": 0,
+    "jailbreak": 1,
+    "linguistic": 2,
+    "prompt_injection": 3,
+    "toxicity": 4
+  }
+}
