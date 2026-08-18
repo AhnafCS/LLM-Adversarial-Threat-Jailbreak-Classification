@@ -1,4 +1,4 @@
-# 🛡️ LLM Adversarial Threat & Jailbreak Classification
+# LLM Adversarial Threat & Jailbreak Classification
 ### **CSE440: Natural Language Processing II — Research Project**
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
@@ -12,11 +12,11 @@
 
 Large Language Models (LLMs) deployed in production applications are susceptible to adversarial prompt manipulation techniques designed to bypass safety guardrails. This research project constructs a complete multi-class NLP classification pipeline to detect and triage adversarial prompts across **5 core vulnerability classes**:
 
-1. **Jailbreak (🟠):** Persona adoption and hypothetical roleplaying exploits designed to circumvent safety guardrails (e.g., DAN, fictional framing).
-2. **Prompt Injection (🔴):** System instruction overrides and context hijacking aimed at extracting internal directives or executing unauthorized behavior.
-3. **Harmful Behavior (🟣):** Direct solicitations for hazardous, illegal, or destructive instructions (e.g., cyberattacks, weapons, synthesis).
-4. **Toxicity (🔴):** Explicit hate speech, harassment, slurs, profanity, and derogatory insults.
-5. **Linguistic Evasion (🔵):** Subtle social engineering, linguistic euphemisms, and syntactic obfuscation.
+1. **Jailbreak:** Persona adoption and hypothetical roleplaying exploits designed to circumvent safety guardrails (e.g., DAN, fictional framing).
+2. **Prompt Injection:** System instruction overrides and context hijacking aimed at extracting internal directives or executing unauthorized behavior.
+3. **Harmful Behavior:** Direct solicitations for hazardous, illegal, or destructive instructions (e.g., cyberattacks, weapons, synthesis).
+4. **Toxicity):** Explicit hate speech, harassment, slurs, profanity, and derogatory insults.
+5. **Linguistic Evasion:** Subtle social engineering, linguistic euphemisms, and syntactic obfuscation.
 
 ---
 
@@ -47,7 +47,7 @@ We evaluate **10 distinct model families** across **3 hyperparameter configurati
 | 3 | **Logistic Regression** | Classical ML | $C=10.0, \text{L2 penalty}, \text{TF-IDF}=15\text{k}$ | 92.03% | 92.12% |
 | 4 | **Bidirectional GRU** | Deep Learning | 2-Layer Bi-GRU (Units: $2\times 128$), Dropout=0.5 | 91.70% | 91.78% |
 | 5 | **Bidirectional SimpleRNN** | Deep Learning | 2-Layer Bi-RNN (Units: $2\times 128$), Dropout=0.5 | 91.57% | 91.67% |
-| 6 | **Random Forest** | Classical ML | $n=300 \text{ trees}, \text{max\_depth}=50$ | 91.47% | 91.62% |
+| 6 | **Random Forest** | Classical ML | n=300 \text{ trees}, \text{max\_depth}=50$ | 91.47% | 91.62% |
 | 7 | **Bidirectional LSTM** | Deep Learning | 2-Layer Bi-LSTM (Units: $2\times 128$), Dropout=0.5 | 91.47% | 91.55% |
 | 8 | **GRU** | Deep Learning | 1-Layer GRU (Units: 128), Dropout=0.5 | 90.77% | 90.90% |
 | 9 | **Naive Bayes (MultinomialNB)** | Classical ML | Smoothing $\alpha=0.1$, Sublinear TF-IDF | 90.03% | 90.12% |
