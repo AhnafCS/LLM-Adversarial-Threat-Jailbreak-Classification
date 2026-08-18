@@ -42,17 +42,18 @@ We evaluate **10 distinct model families** across **3 hyperparameter configurati
 
 | # | Model Architecture | Category | Key Hyperparameters | Test Accuracy | Test Macro F1 |
 |:---:|:---|:---|:---|:---:|:---:|
-| 1 | **BERT Base (`bert-base-uncased`)** | **Transformer** | $\text{lr}=3\times 10^{-5}, \text{epochs}=3, \text{warmup}=0.1$ | **96.63%** | **96.64%** |
+| 1 | **BERT Base (`bert-base-uncased`)** | **Transformer** | `lr=3e-5, epochs=3, warmup=0.1` | **96.63%** | **96.64%** |
 | 2 | **Soft-Voting Ensemble** | **Ensemble** | Weights: 5 (BERT) : 1 (BiLSTM) : 1 (LogReg) | **96.20%** | **96.22%** |
-| 3 | **Logistic Regression** | Classical ML | $C=10.0, \text{L2 penalty}, \text{TF-IDF}=15\text{k}$ | 92.03% | 92.12% |
-| 4 | **Bidirectional GRU** | Deep Learning | 2-Layer Bi-GRU (Units: $2\times 128$), Dropout=0.5 | 91.70% | 91.78% |
-| 5 | **Bidirectional SimpleRNN** | Deep Learning | 2-Layer Bi-RNN (Units: $2\times 128$), Dropout=0.5 | 91.57% | 91.67% |
-| 6 | **Random Forest** | Classical ML | n=300,\text{trees}, \text{max_depth}=50$ | 91.47% | 91.62% |
-| 7 | **Bidirectional LSTM** | Deep Learning | 2-Layer Bi-LSTM (Units: $2\times 128$), Dropout=0.5 | 91.47% | 91.55% |
-| 8 | **GRU** | Deep Learning | 1-Layer GRU (Units: 128), Dropout=0.5 | 90.77% | 90.90% |
-| 9 | **Naive Bayes (MultinomialNB)** | Classical ML | Smoothing $\alpha=0.1$, Sublinear TF-IDF | 90.03% | 90.12% |
-| 10 | **SimpleRNN** | Deep Learning | 1-Layer SimpleRNN (Units: 128), Dropout=0.5 | 88.80% | 89.00% |
-| 11 | **LSTM** | Deep Learning | 1-Layer LSTM (Units: 128), Dropout=0.5 | 87.67% | 87.92% |
+| 3 | **Logistic Regression** | Classical ML | `C=10.0, L2 penalty, TF-IDF=15k` | 92.03% | 92.12% |
+| 4 | **Bidirectional GRU** | Deep Learning | 2-Layer Bi-GRU (Units: 2×128, Dropout=0.5) | 91.70% | 91.78% |
+| 5 | **Bidirectional SimpleRNN** | Deep Learning | 2-Layer Bi-RNN (Units: 2×128, Dropout=0.5) | 91.57% | 91.67% |
+| 6 | **Random Forest** | Classical ML | `n_estimators=300, max_depth=50` | 91.47% | 91.62% |
+| 7 | **Bidirectional LSTM** | Deep Learning | 2-Layer Bi-LSTM (Units: 2×128, Dropout=0.5) | 91.47% | 91.55% |
+| 8 | **GRU** | Deep Learning | 1-Layer GRU (Units: 128, Dropout=0.5) | 90.77% | 90.90% |
+| 9 | **Naive Bayes (MultinomialNB)** | Classical ML | `alpha=0.1, Sublinear TF-IDF` | 90.03% | 90.12% |
+| 10 | **SimpleRNN** | Deep Learning | 1-Layer SimpleRNN (Units: 128, Dropout=0.5) | 88.80% | 89.00% |
+| 11 | **LSTM** | Deep Learning | 1-Layer LSTM (Units: 128, Dropout=0.5) | 87.67% | 87.92% |
+
 
 ---
 
