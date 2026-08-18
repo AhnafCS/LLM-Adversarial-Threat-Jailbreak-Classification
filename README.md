@@ -47,7 +47,7 @@ We evaluate **10 distinct model families** across **3 hyperparameter configurati
 | 3 | **Logistic Regression** | Classical ML | $C=10.0, \text{L2 penalty}, \text{TF-IDF}=15\text{k}$ | 92.03% | 92.12% |
 | 4 | **Bidirectional GRU** | Deep Learning | 2-Layer Bi-GRU (Units: $2\times 128$), Dropout=0.5 | 91.70% | 91.78% |
 | 5 | **Bidirectional SimpleRNN** | Deep Learning | 2-Layer Bi-RNN (Units: $2\times 128$), Dropout=0.5 | 91.57% | 91.67% |
-| 6 | **Random Forest** | Classical ML | n=300 \text{trees}, \text{max_depth}=50$ | 91.47% | 91.62% |
+| 6 | **Random Forest** | Classical ML | n=300,\text{trees}, \text{max_depth}=50$ | 91.47% | 91.62% |
 | 7 | **Bidirectional LSTM** | Deep Learning | 2-Layer Bi-LSTM (Units: $2\times 128$), Dropout=0.5 | 91.47% | 91.55% |
 | 8 | **GRU** | Deep Learning | 1-Layer GRU (Units: 128), Dropout=0.5 | 90.77% | 90.90% |
 | 9 | **Naive Bayes (MultinomialNB)** | Classical ML | Smoothing $\alpha=0.1$, Sublinear TF-IDF | 90.03% | 90.12% |
