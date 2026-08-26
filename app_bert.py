@@ -15,122 +15,175 @@ st.set_page_config(page_title="LLM THREAT CLASSIFIER / BERT", layout="wide")
 # ── STYLES ───────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
+  /* Frutiger Aero / Windows 7 Glass Aesthetic */
   .stApp {
-      background-color: #ffffff;
-      color: #0000ff;
-      font-family: 'Share Tech Mono', 'Courier New', monospace;
+      background: linear-gradient(135deg, #a4d2f0 0%, #e6f2fb 50%, #ffffff 100%);
+      background-attachment: fixed;
+      color: #333333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   .block-container {
       max-width: 98vw !important;
-      padding: 1.5rem 2rem 1.5rem 2rem !important;
+      padding: 1.5rem 2rem 2rem 2rem !important;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-top: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
   }
   #MainMenu, footer, header { visibility: hidden; }
 
   /* Quiet labels */
   .stTextArea label, .stFileUploader label, .stNumberInput label {
-      color: #8888aa !important;
-      font-family: 'Share Tech Mono', monospace !important;
+      color: #306ca0 !important;
+      font-weight: 600 !important;
       font-size: 14px !important;
-      letter-spacing: 0.1em !important;
       text-transform: uppercase !important;
+      letter-spacing: 1px !important;
+      text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
   }
+  
   /* Textarea */
   .stTextArea textarea {
-      background-color: #f4f4ff !important;
-      color: #0000ff !important;
-      font-family: 'Share Tech Mono', 'Courier New', monospace !important;
-      font-size: 16px !important;
+      background-color: rgba(255, 255, 255, 0.8) !important;
+      color: #333333 !important;
+      font-size: 15px !important;
       line-height: 1.5 !important;
-      border: 2px solid #0000ff !important;
-      border-radius: 0 !important;
+      border: 1px solid #99cbee !important;
+      border-radius: 8px !important;
       padding: 14px !important;
+      box-shadow: inset 0px 2px 4px rgba(0,0,0,0.05);
   }
+  .stTextArea textarea:focus {
+      border: 1px solid #4a9be0 !important;
+      box-shadow: 0 0 8px rgba(74, 155, 224, 0.5), inset 0px 2px 4px rgba(0,0,0,0.05) !important;
+  }
+  
   /* Number input */
   .stNumberInput input {
-      border: 2px solid #0000ff !important;
-      border-radius: 0 !important;
-      color: #0000ff !important;
-      font-size: 16px !important;
-      font-family: 'Share Tech Mono', monospace !important;
-      background-color: #f4f4ff !important;
+      background-color: rgba(255, 255, 255, 0.8) !important;
+      border: 1px solid #99cbee !important;
+      border-radius: 8px !important;
+      color: #333333 !important;
+      font-size: 15px !important;
+      box-shadow: inset 0px 2px 4px rgba(0,0,0,0.05);
   }
-  /* Buttons */
+  .stNumberInput input:focus {
+      border: 1px solid #4a9be0 !important;
+      box-shadow: 0 0 8px rgba(74, 155, 224, 0.5), inset 0px 2px 4px rgba(0,0,0,0.05) !important;
+  }
+
+  /* Glossy Buttons (Windows 7 / Aero style) */
   .stButton button {
-      background-color: #0000ff !important;
+      background: linear-gradient(to bottom, #dbeaf9 0%, #9bc2ea 49%, #6ca8e0 50%, #4a90d6 100%) !important;
       color: #ffffff !important;
-      border: none !important;
-      border-radius: 0 !important;
-      font-family: 'Share Tech Mono', monospace !important;
+      border: 1px solid #3c77b4 !important;
+      border-radius: 20px !important; /* pill shape */
       font-size: 14px !important;
-      letter-spacing: 0.12em !important;
+      font-weight: 700 !important;
       text-transform: uppercase !important;
-      padding: 10px 18px !important;
+      letter-spacing: 0.1em !important;
+      padding: 8px 18px !important;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.2), inset 0px 1px 2px rgba(255,255,255,0.8) !important;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.3) !important;
+      transition: all 0.2s ease !important;
   }
-  .stButton button:hover { background-color: #0000cc !important; }
+  .stButton button:hover { 
+      background: linear-gradient(to bottom, #eef5fc 0%, #b8d4f0 49%, #8bbdec 50%, #68a5e0 100%) !important;
+      box-shadow: 0px 3px 6px rgba(0,0,0,0.3), inset 0px 1px 2px rgba(255,255,255,0.9), 0px 0px 10px rgba(108,168,224,0.6) !important;
+  }
+  .stButton button:active {
+      background: linear-gradient(to bottom, #4a90d6 0%, #6ca8e0 49%, #9bc2ea 50%, #dbeaf9 100%) !important;
+      box-shadow: inset 0px 2px 5px rgba(0,0,0,0.4) !important;
+  }
 
   /* Custom tab switcher buttons */
   .tab-btn-active button {
-      background-color: #0000ff !important;
+      background: linear-gradient(to bottom, #8bbdec 0%, #4a9be0 49%, #2884d6 50%, #1c72c2 100%) !important;
       color: #ffffff !important;
-      border: 2px solid #0000ff !important;
+      border: 1px solid #145594 !important;
+      border-radius: 20px !important;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.2), inset 0px 1px 1px rgba(255,255,255,0.5) !important;
+  }
+  .tab-btn-active button:hover {
+      background: linear-gradient(to bottom, #a0cbf0 0%, #68afe5 49%, #4396dc 50%, #2f83cf 100%) !important;
   }
   .tab-btn-inactive button {
-      background-color: #eef !important;
-      color: #0000ff !important;
-      border: 2px solid #0000ff !important;
+      background: linear-gradient(to bottom, #f7fbfd 0%, #e2eef7 49%, #c9e0f2 50%, #bedbf0 100%) !important;
+      color: #3b7cae !important;
+      border: 1px solid #a3c7e6 !important;
+      border-radius: 20px !important;
+      box-shadow: 0px 1px 3px rgba(0,0,0,0.1), inset 0px 1px 2px rgba(255,255,255,0.9) !important;
+      text-shadow: 1px 1px 0px rgba(255,255,255,0.8) !important;
   }
   .tab-btn-inactive button:hover {
-      background-color: #ddf !important;
+      background: linear-gradient(to bottom, #ffffff 0%, #eff6fb 49%, #dfedf8 50%, #d5e9f6 100%) !important;
   }
-  /* File uploader — visible against white */
+  
+  /* File uploader */
   [data-testid="stFileUploader"] {
-      background-color: #eef !important;
-      border: 2px solid #0000ff !important;
+      background: rgba(255,255,255,0.6) !important;
+      border: 1px solid #99cbee !important;
+      border-radius: 12px !important;
       padding: 10px !important;
-      color: #0000ff !important;
+      color: #306ca0 !important;
+      box-shadow: inset 0px 1px 3px rgba(0,0,0,0.05);
   }
   [data-testid="stFileUploaderDropzone"] {
-      background-color: #eef !important;
-      border: 2px dashed #0000ff !important;
-      border-radius: 0 !important;
-      color: #0000ff !important;
+      background: rgba(230, 242, 251, 0.4) !important;
+      border: 2px dashed #7bc3eb !important;
+      border-radius: 10px !important;
+      color: #306ca0 !important;
   }
   [data-testid="stFileUploaderDropzone"] * {
-      color: #0000ff !important;
+      color: #306ca0 !important;
   }
-  /* Force the browse files button inside uploader to be visible */
+  /* Browse files button inside uploader uses glossy button style too */
   [data-testid="stFileUploader"] button {
-      background-color: #0000ff !important;
+      background: linear-gradient(to bottom, #dbeaf9 0%, #9bc2ea 49%, #6ca8e0 50%, #4a90d6 100%) !important;
       color: #ffffff !important;
-      font-family: 'Share Tech Mono', monospace !important;
-      font-size: 12px !important;
-      border: none !important;
+      font-weight: bold !important;
+      border: 1px solid #3c77b4 !important;
+      border-radius: 15px !important;
       padding: 5px 12px !important;
+      box-shadow: 0px 1px 3px rgba(0,0,0,0.2), inset 0px 1px 2px rgba(255,255,255,0.8) !important;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.3) !important;
+  }
+  [data-testid="stFileUploader"] button:hover {
+      background: linear-gradient(to bottom, #eef5fc 0%, #b8d4f0 49%, #8bbdec 50%, #68a5e0 100%) !important;
   }
   [data-testid="stFileUploader"] button * {
       color: #ffffff !important;
   }
   
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-thumb { background: #0000ff; }
+  /* Webkit Scrollbar Windows 7 style */
+  ::-webkit-scrollbar { width: 12px; }
+  ::-webkit-scrollbar-track { background: #e6f0fa; border-left: 1px solid #cce2f4; }
+  ::-webkit-scrollbar-thumb { 
+      background: linear-gradient(to right, #d3e7f8, #a8cceb); 
+      border: 1px solid #8cbde1; 
+      border-radius: 6px; 
+  }
+  ::-webkit-scrollbar-thumb:hover { background: linear-gradient(to right, #eaf3fb, #b9d8f0); }
 </style>
 """, unsafe_allow_html=True)
 
 # ── HEADER ───────────────────────────────────────────────────────────────────
 st.markdown("""
-<div style="border-bottom:3px solid #0000ff;padding-bottom:12px;margin-bottom:18px;
-            display:flex;justify-content:space-between;align-items:flex-end;">
+<div style="border-bottom: 2px solid #a8d0ef; padding-bottom: 15px; margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: flex-end;
+            background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.6), rgba(255,255,255,0));
+            padding: 15px; border-radius: 10px;">
   <div>
-    <div style="font-size:38px;font-weight:900;letter-spacing:.04em;color:#0000ff;line-height:1;">
+    <div style="font-size: 38px; font-weight: 800; color: #206ab0; line-height: 1; text-shadow: 2px 2px 0px #ffffff, 0px 4px 6px rgba(0,0,0,0.1); letter-spacing: 1px;">
       LLM THREAT CLASSIFIER
     </div>
-    <div style="font-size:13px;letter-spacing:.18em;color:#8888aa;margin-top:6px;">
+    <div style="font-size: 14px; font-weight: 600; color: #438bc9; margin-top: 8px; letter-spacing: 0.1em; text-shadow: 1px 1px 0px #ffffff;">
       BERT TRANSFORMER &nbsp;/&nbsp; 5-CLASS ADVERSARIAL DETECTION
     </div>
   </div>
-  <div style="font-size:13px;letter-spacing:.18em;color:#8888aa;text-align:right;">
+  <div style="font-size: 14px; font-weight: 700; color: #438bc9; text-align: right; text-shadow: 1px 1px 0px #ffffff; background: rgba(255,255,255,0.7); padding: 8px 15px; border-radius: 20px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,1);">
     BERT BASE<br>ACC: 96.5%
   </div>
 </div>
@@ -241,7 +294,7 @@ def extract_text(uploaded_file):
 
 
 # ════════════════════════════════════════════════════════════════════════════
-# ROW 1 — Custom tab switcher (no st.tabs — avoids Streamlit opacity bug)
+# ROW 1 — Custom tab switcher
 # ════════════════════════════════════════════════════════════════════════════
 if "active_tab" not in st.session_state:
     st.session_state.active_tab = "dataset"
@@ -273,8 +326,7 @@ with tab_col2:
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Blue underline separating tabs from content
-st.markdown('<div style="border-top:2px solid #0000ff;margin:0 0 14px 0;"></div>', unsafe_allow_html=True)
+# Aero style underline separating tabs from content (REMOVED)
 
 # ── Tab content ──────────────────────────────────────────────────────────────
 if st.session_state.active_tab == "dataset":
@@ -307,10 +359,10 @@ if st.session_state.active_tab == "dataset":
     with cgt:
         if st.session_state.actual_label:
             st.markdown(
-                f'<div style="background:#000000;color:#fff;padding:10px 20px;'
-                f'display:inline-block;font-size:15px;letter-spacing:.06em;">'
-                f'<span style="font-size:12px;opacity:.8;">ROW #{st.session_state.row_index} &nbsp;/&nbsp; GROUND TRUTH &nbsp;</span><br>'
-                f'<strong style="font-size:22px;">{st.session_state.actual_label.upper()}</strong></div>',
+                f'<div style="background: linear-gradient(to bottom, #ffffff, #e6f0fa); color: #1c5e9c; padding: 8px 18px; '
+                f'display: inline-flex; align-items: center; border-radius: 20px; border: 1px solid #99cbee; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px;">'
+                f'<span style="font-size: 11px; font-weight: 700; text-shadow: 1px 1px 0 #fff; margin-right: 8px; letter-spacing: 0.05em;">ROW #{st.session_state.row_index} &nbsp;|&nbsp; GROUND TRUTH:</span>'
+                f'<strong style="font-size: 14px; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); letter-spacing: 0.05em;">{st.session_state.actual_label.upper()}</strong></div>',
                 unsafe_allow_html=True
             )
 
@@ -339,12 +391,13 @@ else:  # upload tab
             msg = st.session_state.get('upload_msg', "")
             if msg:
                 st.markdown(
-                    f'<div style="border-left:4px solid #0000ff;padding:8px 14px;font-size:14px;background:#eef;color:#0000ff;">{msg}</div>',
+                    f'<div style="border-left: 4px solid #4a9be0; padding: 10px 16px; font-size: 14px; font-weight: 600; '
+                    f'background: linear-gradient(to right, #e2f0fb, rgba(255,255,255,0.5)); color: #1c5e9c; border-radius: 0 8px 8px 0; '
+                    f'box-shadow: 0 1px 3px rgba(0,0,0,0.05);">{msg}</div>',
                     unsafe_allow_html=True
                 )
 
-# Thin divider before main panel
-st.markdown('<div style="border-top:2px solid #0000ff;margin:14px 0 16px 0;"></div>', unsafe_allow_html=True)
+# Divider before main panel (REMOVED)
 
 # ════════════════════════════════════════════════════════════════════════════
 # ROW 2 — Two columns: [Prompt editor + Scan] | [Result + Probabilities]
@@ -353,7 +406,7 @@ col_prompt, col_result = st.columns([1, 1], gap="large")
 
 # ── LEFT: Prompt editor ───────────────────────────────────────────────────────
 with col_prompt:
-    st.markdown('<div style="font-size:13px;letter-spacing:.22em;color:#8888aa;margin-bottom:6px;">PROMPT</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-size: 14px; font-weight: bold; letter-spacing: 1px; color: #306ca0; margin-bottom: 12px; margin-top: 5px; text-shadow: 1px 1px 0 #fff;">PROMPT</div>', unsafe_allow_html=True)
     user_prompt = st.text_area(
         "Editable prompt",
         value=st.session_state.prompt,
@@ -361,7 +414,7 @@ with col_prompt:
         label_visibility="collapsed",
         placeholder="Type or paste an adversarial prompt here..."
     )
-    scan = st.button("▶  SCAN THREAT / BERT", use_container_width=True)
+    scan = st.button("SCAN THREAT / BERT", use_container_width=True)
 
     if scan:
         if not user_prompt.strip():
@@ -380,10 +433,15 @@ with col_prompt:
             unchanged = (user_prompt.strip() == st.session_state.prompt.strip())
             if unchanged and actual:
                 is_correct = (top_label == actual)
-                verdict    = "✓  CORRECT" if is_correct else "✗  WRONG"
-                vbg        = "#008800"    if is_correct else "#dd0000"
+                verdict    = "CORRECT" if is_correct else "WRONG"
+                
+                # Frutiger green / red glossy backgrounds
+                vbg = "linear-gradient(to bottom, #a8e063, #56ab2f)" if is_correct else "linear-gradient(to bottom, #ff9999, #e63946)"
+                border_col = "#4caf50" if is_correct else "#c62828"
             else:
-                verdict, vbg = "—  CUSTOM INPUT", "#666666"
+                verdict = "CUSTOM INPUT"
+                vbg = "linear-gradient(to bottom, #f0f0f0, #c0c0c0)"
+                border_col = "#999999"
 
             descriptions = {
                 "jailbreak":        "Persona / roleplay exploit bypassing content filters.",
@@ -400,6 +458,7 @@ with col_prompt:
                 "top_conf":  top_conf,
                 "verdict":   verdict,
                 "vbg":       vbg,
+                "border_col": border_col,
                 "desc":      descriptions.get(top_label, ""),
             }
             st.rerun()
@@ -410,51 +469,56 @@ with col_result:
     probs = st.session_state.probs
 
     if res and probs is not None:
-        # Classification block
+        # Classification block (Glossy Blue)
         st.markdown(f"""
-<div style="background:#0000ff;color:#fff;padding:18px 22px;margin-bottom:12px;">
-  <div style="font-size:12px;letter-spacing:.22em;opacity:.8;">CLASSIFICATION</div>
-  <div style="font-size:36px;font-weight:900;letter-spacing:.04em;line-height:1.2;">{res["top_label"].upper()}</div>
-  <div style="font-size:20px;margin-top:4px;">CONFIDENCE: {res["top_conf"]:.2f}%</div>
+<div style="background: linear-gradient(to bottom, #74b9ff, #0984e3); color: #ffffff; padding: 15px 20px; margin-bottom: 10px; 
+            border-radius: 15px; border: 1px solid #005f9e; box-shadow: 0 4px 10px rgba(9, 132, 227, 0.4), inset 0 1px 2px rgba(255,255,255,0.8);">
+  <div style="font-size: 13px; font-weight: bold; letter-spacing: 0.15em; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">CLASSIFICATION</div>
+  <div style="font-size: 38px; font-weight: 800; letter-spacing: 0.05em; line-height: 1.2; text-shadow: 1px 2px 3px rgba(0,0,0,0.3); margin-top: 5px;">{res["top_label"].upper()}</div>
+  <div style="font-size: 20px; font-weight: 600; margin-top: 8px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">CONFIDENCE: {res["top_conf"]:.2f}%</div>
 </div>
 """, unsafe_allow_html=True)
 
-        # Verdict block — big coloured banner
+        # Verdict block
         st.markdown(f"""
-<div style="background:{res["vbg"]};color:#fff;padding:14px 22px;
-            font-size:24px;font-weight:900;letter-spacing:.08em;margin-bottom:12px;">
+<div style="background: {res["vbg"]}; color: #ffffff; padding: 10px 20px; border-radius: 10px; border: 1px solid {res["border_col"]};
+            font-size: 22px; font-weight: 800; letter-spacing: 0.05em; margin-bottom: 10px; 
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2), inset 0 1px 2px rgba(255,255,255,0.7); text-shadow: 1px 1px 2px rgba(0,0,0,0.4);">
   {res["verdict"]}
 </div>
 """, unsafe_allow_html=True)
 
-        # Description
-        st.markdown(
-            f'<div style="font-size:14px;color:#555;border-left:4px solid #0000ff;'
-            f'padding-left:12px;margin-bottom:18px;">{res["desc"]}</div>',
-            unsafe_allow_html=True
-        )
-
         # Probability bars
-        st.markdown('<div style="font-size:12px;letter-spacing:.2em;color:#8888aa;margin-bottom:8px;">PROBABILITIES</div>', unsafe_allow_html=True)
+        st.markdown('<div style="font-size: 14px; font-weight: bold; letter-spacing: 1px; color: #306ca0; margin-bottom: 12px; text-shadow: 1px 1px 0 #fff;">PROBABILITIES</div>', unsafe_allow_html=True)
         for i, label in id_to_label.items():
             pct    = probs[i] * 100.0
-            filled = int(pct / 4)
-            bar    = "█" * filled + "░" * (25 - filled)
+            
             is_top = (i == res["top_idx"])
-            bg, fg, wt = ("#0000ff", "#fff", "900") if is_top else ("#eef", "#0000ff", "400")
+            if is_top:
+                bg = "linear-gradient(to right, #4a9be0, #2884d6)"
+                txt_col = "#ffffff"
+                border = "1px solid #1c72c2"
+                shadow = "0 2px 5px rgba(40,132,214,0.4), inset 0 1px 1px rgba(255,255,255,0.5)"
+            else:
+                bg = "linear-gradient(to right, #f0f7fc, #e2eef7)"
+                txt_col = "#3b7cae"
+                border = "1px solid #bde0fa"
+                shadow = "0 1px 2px rgba(0,0,0,0.05), inset 0 1px 2px rgba(255,255,255,0.9)"
+
             st.markdown(f"""
-<div style="background:{bg};color:{fg};padding:8px 14px;margin-bottom:5px;
-            font-family:'Share Tech Mono',monospace;">
-  <span style="font-size:13px;letter-spacing:.1em;font-weight:{wt};">{label.upper()}</span>
-  &nbsp;&nbsp;
-  <span style="font-size:16px;font-weight:900;">{pct:.1f}%</span>
-  &nbsp;<span style="font-size:12px;">{bar}</span>
+<div style="background: {bg}; color: {txt_col}; padding: 12px 14px; margin-bottom: 10px; border-radius: 8px; border: {border}; box-shadow: {shadow}; display: flex; align-items: center; justify-content: space-between;">
+  <span style="font-size: 14px; font-weight: {'800' if is_top else '600'}; text-shadow: {'1px 1px 1px rgba(0,0,0,0.2)' if is_top else '1px 1px 0 #fff'};">{label.upper()}</span>
+  <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 16px; font-weight: 800; text-shadow: {'1px 1px 1px rgba(0,0,0,0.2)' if is_top else '1px 1px 0 #fff'};">{pct:.1f}%</span>
+      <div style="width: 100px; height: 12px; background: rgba(0,0,0,0.1); border-radius: 6px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);">
+          <div style="width: {pct}%; height: 100%; background: {'linear-gradient(to bottom, #a0e0ff, #56baf0)' if is_top else 'linear-gradient(to bottom, #a0cbf0, #68afe5)'}; border-radius: 6px; box-shadow: inset 0 1px 1px rgba(255,255,255,0.7);"></div>
+      </div>
+  </div>
 </div>
 """, unsafe_allow_html=True)
 
     else:
-        # Taxonomy shown before first scan
-        st.markdown('<div style="font-size:12px;letter-spacing:.22em;color:#8888aa;margin-bottom:10px;">THREAT TAXONOMY</div>', unsafe_allow_html=True)
+        st.markdown('<div style="font-size: 14px; font-weight: bold; letter-spacing: 1px; color: #306ca0; margin-bottom: 12px; margin-top: 5px; text-shadow: 1px 1px 0 #fff;">THREAT CLASSES</div>', unsafe_allow_html=True)
         for cat, desc in {
             "JAILBREAK":        "Persona / DAN filter evasion",
             "PROMPT INJECTION":  "System instruction hijack",
@@ -463,15 +527,8 @@ with col_result:
             "LINGUISTIC":        "Social engineering / evasion",
         }.items():
             st.markdown(f"""
-<div style="border-left:4px solid #0000ff;padding:8px 14px;margin-bottom:8px;background:#eef;">
-  <div style="font-size:14px;font-weight:900;letter-spacing:.1em;color:#0000ff;">{cat}</div>
-  <div style="font-size:12px;color:#555;margin-top:2px;">{desc}</div>
+<div style="background: linear-gradient(to right, #f0f7fc, #e2eef7); color: #3b7cae; padding: 12px 14px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #bde0fa; box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0 1px 2px rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: space-between;">
+  <span style="font-size: 14px; font-weight: 600; text-shadow: 1px 1px 0 #fff;">{cat}</span>
+  <span style="font-size: 13px; font-weight: 500; color: #5a8ab8;">{desc}</span>
 </div>
 """, unsafe_allow_html=True)
-
-        st.markdown(
-            '<div style="font-size:13px;color:#8888aa;margin-top:20px;letter-spacing:.06em;">'
-            'LOAD A SAMPLE OR UPLOAD A FILE,<br>'
-            'THEN CLICK <strong style="color:#0000ff;">▶ SCAN THREAT</strong> TO CLASSIFY.</div>',
-            unsafe_allow_html=True
-        )
