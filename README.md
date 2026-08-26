@@ -1,6 +1,7 @@
 # LLM Adversarial Threat Classifier
 
 LIVE LINK : https://nojailbreak.streamlit.app/
+
 This is our lab project for CSE440 (Natural Language Processing II). 
 
 We built a machine learning pipeline that catches bad prompts (like jailbreaks or toxic content) before they reach an LLM. We fine-tuned a BERT model that categorizes these threats into 5 different classes. It even supports extracting text from PDFs and images using OCR.
