@@ -7,7 +7,7 @@ We built a machine learning pipeline that catches bad prompts (like jailbreaks o
 ## Features
 * **Real-time scanning:** Instantly checks prompts and shows confidence scores.
 * **File Uploads:** Drag and drop PDFs or images to scan text directly.
-* **High Accuracy:** We hit a Macro F1 score of 96.64%.
+* **High Accuracy:** We hit a Macro F1 score of 96.5%.
 
 ## How to run locally
 
